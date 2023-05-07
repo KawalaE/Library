@@ -5,6 +5,21 @@
     font-family: 'Inter Tight', sans-serif;
 
 }
+/*Fix browsers autofill*/ 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 9999s ease-in-out 0s;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px transparent inset; /* Change the color to your own background color */
+    -webkit-text-fill-color:black;
+}
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: /*your box-shadow*/0 0 0 50px transparent inset;
+    -webkit-text-fill-color: black;
+}
 input,
 textarea,
 select,
@@ -15,17 +30,18 @@ button {
   box-sizing: border-box;
   font-family: inherit;
   font-size: 100%;
-  appearance: none;
+  border: none;
 }
 .nav{
     height: 100px;
     box-shadow: 0px 2px 3px grey;
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
+    gap: 10px;
     align-items: center;
     padding: 30px;
     font-size: 28px;
-    font-weight: bolders;
+    font-weight: bold;
 }
 .logo{
     display: flex;
@@ -34,4 +50,105 @@ button {
 }
 .book-logo{
     height: 60px;
+}
+.add-books{
+    text-align: center;
+    padding: 40px;
+}
+.open-modal{
+    font-size: larger;
+    font-weight: bold;
+    height: 50px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+.open-modal:hover{
+    color: white;
+    background-image: linear-gradient(to right, rgb(66, 66, 218), rgb(113, 22, 231), rgb(144, 19, 216));
+    transform: scale(110%);
+    transition: 0.6s;
+}
+.open-modal:active, .submit:active{
+    transform: scale(90%);
+    transition: 0.3s;
+}
+.submit{
+    color: white;
+    background-image: linear-gradient(to right, rgb(66, 66, 218), rgb(113, 22, 231), rgb(144, 19, 216));
+    height: 40px;
+    max-width: 130px;
+    border-radius: 10px;
+    font-size: large;
+    font-weight: bold;
+}
+.submit:hover{
+    transform: scale(110%);
+    transition: 0.6s;
+}
+.modal::backdrop{
+    background: rgb(109, 109, 109);
+    opacity: .4;
+}
+.modal{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 350px;
+    min-width: clamp(220px, 300px, 350px);
+    border: none;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding:10px;
+}
+.close-modal{
+    width: 25px;
+    background-color: transparent;
+}
+.close-modal img{
+    width: 25px;
+}
+.close-modal:hover{
+    transform: scale(120%);
+}
+#form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    padding: 20px;
+}
+
+.text-input{
+    min-width:250px;
+    height: 40px;
+    padding: 15px;
+    border: 1.5px solid grey;
+    border-radius: 5px;
+}
+.text-input:focus{
+    outline-color:rgb(113, 22, 231);
+}
+.book-status{
+    display: flex;
+}
+input[type="checkbox"]{
+    width: 30px;
+    accent-color:  blueviolet;
+}
+
+.footer-elements{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; 
+    margin-top: auto;
+    padding: 10px;
+}
+.footer{
+    color: rgb(113, 22, 231);
+}
+.footer-git:hover{
+    transform: rotate(360deg) scale(1.1);
+    transition-duration:0.5s;
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <link rel="icon" type="image/svg" href="Pictures/book.svg"/>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,11 +14,34 @@
 </head>
 <body>
     <div class="nav">
-        <div class="logo">
-            <img  class="book-logo" src="Pictures/book.svg" alt="Book icon.">
-            <div>Library</div>
-        </div>
-        <div>Log in</div>
+        <img  class="book-logo" src="Pictures/book.svg" alt="Book icon.">
+        <div>Library</div>
     </div>
+    <div class="add-books">
+        <button class="open-modal">Add books</button>
+    </div>
+    <dialog open id="modal" class="modal">
+        <button class="close-modal"><img src="Pictures/x.png" alt="X icon."></button>
+        <form id="form" method="dialog">
+            <div class="title">
+                <input class ="text-input" type="text" name="title" id="title" placeholder="Book title">
+            </div>
+            <div class="author">
+                <input class ="text-input" type="text" name="author" id="author" placeholder="Author">
+            </div>
+            <div class="num-of-pages">
+                <input class ="text-input" type="number" name="num-of-pages" id="num-of-pages" placeholder="Number of pages">
+            </div>
+            <div class="book-status">
+                <p>Have you read that book?</p>
+                <input type="checkbox" name="checkbox" id="status">
+            </div>
+            <button class="submit" type="submit">Submit</button>
+        </form>
+    </dialog>
+    <!--<div class="footer-elements">
+        <a class ="footer"> Created by KawalaE</a>
+        <a class ="footer-git" href="https://github.com/KawalaE/Project-dashboard"><img src="Pictures/github-mark-purple.svg" alt="GitHub icon." width="30"></a>
+    </div> -->
 </body>
 </html>
