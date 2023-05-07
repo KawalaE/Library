@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter Tight', sans-serif;
+
+}
+input,
+textarea,
+select,
+button {
+  width: 150px;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 100%;
+  appearance: none;
+}
+.nav{
+    height: 100px;
+    box-shadow: 0px 2px 3px grey;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    font-size: 28px;
+    font-weight: bolders;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.book-logo{
+    height: 60px;
+}
