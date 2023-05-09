@@ -6,6 +6,15 @@ const bookTitle = document.querySelector("#title");
 const bookAuthor = document.querySelector("#author");
 const numOfPages = document.querySelector("#num-of-pages");
 const bookStatus = document.querySelector("#status");
+const cards = document.getElementById("cards");
+const myLibrary = [];
+
+function Book(title, author, numberOfPages, read) {
+  this.title = title;
+  this.author = author;
+  this.numberOfPages = numberOfPages;
+  this.read = read;
+}
 
 openModalBtn.addEventListener("click", () => {
   modal.showModal();
@@ -15,21 +24,30 @@ closeModalBtn.addEventListener("click", () => {
   modal.close();
 });
 
-const myLibrary = [];
-
-function Book(title, author, numberOfPages, read) {
-  this.title = title;
-  this.author = author;
-  this.numberOfPages = numberOfPages;
-  this.read = read;
-}
 const book1 = new Book("Misery", "Stephen King", 310, true);
 
 function addToLibrary(book) {
-  myLibrary.push(Object.values(book));
+  myLibrary.push(book);
 }
-
 addToLibrary(book1);
+
+function addBookCard(book) {
+  const card = document.createElement("div");
+  card.classList.add("card");
+  cards.appendChild(card);
+  const cardTitle = document.createElement("div");
+  const cardAuthor = document.createElement("div");
+  const cardPages = document.createElement("div");
+  const cardStatus = document.createElement("div");
+  cardTitle.textContent = book.title;
+  cardAuthor.textContent = book.author;
+  cardPages.textContent = `${book.numberOfPages} pages`;
+  cardStatus.textContent = book.read;
+  card.appendChild(cardTitle);
+  card.appendChild(cardAuthor);
+  card.appendChild(cardPages);
+  card.appendChild(cardStatus);
+}
 
 submitBtn.addEventListener("click", () => {
   const userBook = new Book(
@@ -39,6 +57,7 @@ submitBtn.addEventListener("click", () => {
     bookStatus.checked
   );
   addToLibrary(userBook);
+  addBookCard(userBook);
 });
-
+addBookCard(book1);
 console.log(myLibrary);

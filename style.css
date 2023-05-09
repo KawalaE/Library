@@ -136,14 +136,37 @@ input[type="checkbox"]{
     width: 30px;
     accent-color:  blueviolet;
 }
-
+#cards{
+    display: flex;
+    gap: 40px;
+    padding: 40px;
+    flex-wrap: wrap;
+}
+.card{
+    width: 250px;
+    height: 300px;
+    background-color: blueviolet;
+    opacity: .4;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    color:white;
+    font-size: large;
+    font-weight: bolder;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.08), 0 2px 2px rgba(0,0,0,0.12), 0 4px 4px rgba(0,0,0,0.16), 0 8px 8px rgba(0,0,0,0.20);
+}
 .footer-elements{
     display:flex;
     align-items: center;
     justify-content: center;
     gap: 10px; 
-    margin-top: auto;
+    position: absolute;
+    bottom: 0;
     padding: 10px;
+    width: 100%;
 }
 .footer{
     color: rgb(113, 22, 231);
