@@ -7,7 +7,7 @@ const bookAuthor = document.querySelector("#author");
 const numOfPages = document.querySelector("#num-of-pages");
 const bookStatus = document.querySelector("#status");
 const cards = document.getElementById("cards");
-const myLibrary = [];
+let myLibrary = [];
 
 function Book(title, author, numberOfPages, read) {
   this.title = title;
@@ -43,10 +43,19 @@ function addBookCard(book) {
   cardAuthor.textContent = book.author;
   cardPages.textContent = `${book.numberOfPages} pages`;
   cardStatus.textContent = book.read;
+  const removeButton = document.createElement("button");
+  removeButton.classList.add("remove");
+  removeButton.textContent = "Remove";
+  removeButton.addEventListener("click", () => {
+    myLibrary = myLibrary.splice(myLibrary.indexOf(book), 1);
+    card.remove();
+  });
+
   card.appendChild(cardTitle);
   card.appendChild(cardAuthor);
   card.appendChild(cardPages);
   card.appendChild(cardStatus);
+  card.appendChild(removeButton);
 }
 
 submitBtn.addEventListener("click", () => {
