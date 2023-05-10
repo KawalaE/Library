@@ -7,6 +7,8 @@ const bookAuthor = document.querySelector("#author");
 const numOfPages = document.querySelector("#num-of-pages");
 const bookStatus = document.querySelector("#status");
 const cards = document.getElementById("cards");
+const titleOutline = document.querySelector(".text-input");
+
 let myLibrary = [];
 
 function Book(title, author, numberOfPages, read) {
@@ -43,7 +45,26 @@ function addBookCard(book) {
   cardAuthor.textContent = book.author;
   cardPages.textContent = `${book.numberOfPages} pages`;
   cardStatus.textContent = book.read;
+  const buttons = document.createElement("div");
+  buttons.classList.add("card-buttons");
   const removeButton = document.createElement("button");
+  const statusButton = document.createElement("button");
+  statusButton.classList.add("status-btn");
+  statusButton.textContent = "Not read";
+  statusButton.classList.add("fail");
+  statusButton.addEventListener("click", () => {
+    if (statusButton.textContent === "Not read") {
+      statusButton.textContent = "Read";
+      statusButton.classList.remove("fail");
+      statusButton.classList.add("success");
+      cardStatus.textContent = true;
+    } else {
+      statusButton.textContent = "Not read";
+      statusButton.classList.remove("success");
+      statusButton.classList.add("fail");
+      cardStatus.textContent = false;
+    }
+  });
   removeButton.classList.add("remove");
   removeButton.textContent = "Remove";
   removeButton.addEventListener("click", () => {
@@ -55,10 +76,13 @@ function addBookCard(book) {
   card.appendChild(cardAuthor);
   card.appendChild(cardPages);
   card.appendChild(cardStatus);
-  card.appendChild(removeButton);
+  card.appendChild(buttons);
+  buttons.appendChild(removeButton);
+  buttons.appendChild(statusButton);
 }
 
-submitBtn.addEventListener("click", () => {
+submitBtn.addEventListener("click", (e) => {
+  e.preventDefault();
   const userBook = new Book(
     bookTitle.value,
     bookAuthor.value,
@@ -68,5 +92,6 @@ submitBtn.addEventListener("click", () => {
   addToLibrary(userBook);
   addBookCard(userBook);
 });
+
 addBookCard(book1);
 console.log(myLibrary);
