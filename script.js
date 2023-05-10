@@ -52,17 +52,28 @@ function addBookCard(book) {
   statusButton.classList.add("status-btn");
   statusButton.textContent = "Not read";
   statusButton.classList.add("fail");
+  if (cardStatus.textContent === "true") {
+    cardStatus.textContent = "Already read!";
+    statusButton.textContent = "Not read";
+    statusButton.classList.remove("success");
+    statusButton.classList.add("fail");
+  } else {
+    cardStatus.textContent = "Not read yet :(";
+    statusButton.textContent = "Read";
+    statusButton.classList.remove("fail");
+    statusButton.classList.add("success");
+  }
   statusButton.addEventListener("click", () => {
     if (statusButton.textContent === "Not read") {
       statusButton.textContent = "Read";
       statusButton.classList.remove("fail");
       statusButton.classList.add("success");
-      cardStatus.textContent = true;
+      cardStatus.textContent = "Not read yet :(";
     } else {
       statusButton.textContent = "Not read";
       statusButton.classList.remove("success");
       statusButton.classList.add("fail");
-      cardStatus.textContent = false;
+      cardStatus.textContent = "Already read!";
     }
   });
   removeButton.classList.add("remove");
