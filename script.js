@@ -7,8 +7,9 @@ const bookAuthor = document.querySelector("#author");
 const numOfPages = document.querySelector("#num-of-pages");
 const bookStatus = document.querySelector("#status");
 const cards = document.getElementById("cards");
-const titleOutline = document.querySelector(".text-input");
-
+const titleOutline = document.querySelector("#title.text-input");
+const authorOutline = document.querySelector("#author.text-input");
+const numberOutline = document.querySelector("#num-of-pages.text-input");
 let myLibrary = [];
 
 function Book(title, author, numberOfPages, read) {
@@ -18,20 +19,44 @@ function Book(title, author, numberOfPages, read) {
   this.read = read;
 }
 
-openModalBtn.addEventListener("click", () => {
-  modal.showModal();
-});
-
-closeModalBtn.addEventListener("click", () => {
-  modal.close();
-});
-
-const book1 = new Book("Misery", "Stephen King", 310, true);
-
 function addToLibrary(book) {
   myLibrary.push(book);
 }
-addToLibrary(book1);
+
+function resetModal() {
+  bookTitle.value = "";
+  bookAuthor.value = "";
+  numOfPages.value = "";
+  bookStatus.checked = false;
+  titleOutline.classList.remove("form-fail");
+  authorOutline.classList.remove("form-fail");
+  numberOutline.classList.remove("form-fail");
+}
+
+function createModal() {
+  openModalBtn.addEventListener("click", () => {
+    resetModal();
+    modal.showModal();
+  });
+  closeModalBtn.addEventListener("click", () => {
+    modal.close();
+  });
+}
+
+function bookStatusCheck(cardInfo, buttonInfo) {
+  if (cardInfo.textContent === "true") {
+    cardInfo.textContent = "Already read!";
+    buttonInfo.textContent = "Not read";
+    buttonInfo.classList.remove("success");
+    buttonInfo.classList.add("fail");
+  } else {
+    cardInfo.textContent = "Not read yet :(";
+    buttonInfo.textContent = "Read";
+    buttonInfo.classList.remove("fail");
+    buttonInfo.classList.add("success");
+  }
+}
+createModal();
 
 function addBookCard(book) {
   const card = document.createElement("div");
@@ -52,6 +77,8 @@ function addBookCard(book) {
   statusButton.classList.add("status-btn");
   statusButton.textContent = "Not read";
   statusButton.classList.add("fail");
+  bookStatusCheck(cardStatus, statusButton);
+
   if (cardStatus.textContent === "true") {
     cardStatus.textContent = "Already read!";
     statusButton.textContent = "Not read";
@@ -82,7 +109,6 @@ function addBookCard(book) {
     myLibrary = myLibrary.splice(myLibrary.indexOf(book), 1);
     card.remove();
   });
-
   card.appendChild(cardTitle);
   card.appendChild(cardAuthor);
   card.appendChild(cardPages);
@@ -91,18 +117,42 @@ function addBookCard(book) {
   buttons.appendChild(removeButton);
   buttons.appendChild(statusButton);
 }
-
-submitBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  const userBook = new Book(
-    bookTitle.value,
-    bookAuthor.value,
-    numOfPages.value,
-    bookStatus.checked
-  );
-  addToLibrary(userBook);
-  addBookCard(userBook);
-});
-
+function formValidation(book, element) {
+  if (book.title === "" && book.author === "" && book.numberOfPages === "") {
+    element.preventDefault();
+    titleOutline.classList.add("form-fail");
+    authorOutline.classList.add("form-fail");
+    numberOutline.classList.add("form-fail");
+  }
+  if (book.title === "") {
+    element.preventDefault();
+    titleOutline.classList.add("form-fail");
+  } else if (book.author === "") {
+    element.preventDefault();
+    authorOutline.classList.add("form-fail");
+  } else if (book.numberOfPages === "") {
+    element.preventDefault();
+    numberOutline.classList.add("form-fail");
+  } else {
+    titleOutline.classList.remove("form-fail");
+    authorOutline.classList.remove("form-fail");
+    numberOutline.classList.remove("form-fail");
+    addToLibrary(book);
+    addBookCard(book);
+  }
+}
+function submitBook() {
+  submitBtn.addEventListener("click", (element) => {
+    const userBook = new Book(
+      bookTitle.value,
+      bookAuthor.value,
+      numOfPages.value,
+      bookStatus.checked
+    );
+    formValidation(userBook, element);
+  });
+}
+submitBook();
+const book1 = new Book("Misery", "Stephen King", 310, true);
+addToLibrary(book1);
 addBookCard(book1);
-console.log(myLibrary);

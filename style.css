@@ -5,6 +5,11 @@
     font-family: 'Inter Tight', sans-serif;
 
 }
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 /*Fix browsers autofill*/ 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -126,6 +131,13 @@ button {
     border: 1.5px solid grey;
     border-radius: 5px;
 }
+.form-fail{
+    border-color:  red;
+}
+.form-success{
+    border-color:  rgb(95, 240, 102);
+}
+
 .text-input:focus{
     outline-color:rgb(113, 22, 231);
 }
@@ -141,6 +153,7 @@ input[type="checkbox"]{
     gap: 40px;
     padding: 40px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .card{
     width: 250px;
@@ -197,8 +210,7 @@ input[type="checkbox"]{
     align-items: center;
     justify-content: center;
     gap: 10px; 
-    position: absolute;
-    bottom: 0;
+    margin-top: auto;
     padding: 10px;
     width: 100%;
 }
