@@ -13,5 +13,6 @@ module.exports = {
   rules: {
     "no-unused-vars": "warn",
     "prettier/prettier": "error",
+    "no-param-reassign": "off",
   },
 };

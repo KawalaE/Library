@@ -55,9 +55,27 @@ function bookStatusCheck(cardInfo, buttonInfo) {
     buttonInfo.classList.remove("fail");
     buttonInfo.classList.add("success");
   }
+  buttonInfo.addEventListener("click", () => {
+    if (buttonInfo.textContent === "Not read") {
+      buttonInfo.textContent = "Read";
+      buttonInfo.classList.remove("fail");
+      buttonInfo.classList.add("success");
+      cardInfo.textContent = "Not read yet :(";
+    } else {
+      buttonInfo.textContent = "Not read";
+      buttonInfo.classList.remove("success");
+      buttonInfo.classList.add("fail");
+      cardInfo.textContent = "Already read!";
+    }
+  });
+}
+function removeBookCard(removeBtn, card, bookObj) {
+  removeBtn.addEventListener("click", () => {
+    myLibrary = myLibrary.splice(myLibrary.indexOf(bookObj), 1);
+    card.remove();
+  });
 }
 createModal();
-
 function addBookCard(book) {
   const card = document.createElement("div");
   card.classList.add("card");
@@ -78,37 +96,9 @@ function addBookCard(book) {
   statusButton.textContent = "Not read";
   statusButton.classList.add("fail");
   bookStatusCheck(cardStatus, statusButton);
-
-  if (cardStatus.textContent === "true") {
-    cardStatus.textContent = "Already read!";
-    statusButton.textContent = "Not read";
-    statusButton.classList.remove("success");
-    statusButton.classList.add("fail");
-  } else {
-    cardStatus.textContent = "Not read yet :(";
-    statusButton.textContent = "Read";
-    statusButton.classList.remove("fail");
-    statusButton.classList.add("success");
-  }
-  statusButton.addEventListener("click", () => {
-    if (statusButton.textContent === "Not read") {
-      statusButton.textContent = "Read";
-      statusButton.classList.remove("fail");
-      statusButton.classList.add("success");
-      cardStatus.textContent = "Not read yet :(";
-    } else {
-      statusButton.textContent = "Not read";
-      statusButton.classList.remove("success");
-      statusButton.classList.add("fail");
-      cardStatus.textContent = "Already read!";
-    }
-  });
   removeButton.classList.add("remove");
   removeButton.textContent = "Remove";
-  removeButton.addEventListener("click", () => {
-    myLibrary = myLibrary.splice(myLibrary.indexOf(book), 1);
-    card.remove();
-  });
+  removeBookCard(removeButton, card, book);
   card.appendChild(cardTitle);
   card.appendChild(cardAuthor);
   card.appendChild(cardPages);
@@ -151,8 +141,15 @@ function submitBook() {
     );
     formValidation(userBook, element);
   });
+  if(userBook.title !== ''){
+    titleOutline.classList.aaa("form-success");
+  }
 }
 submitBook();
+
+
+
+/* Create example */
 const book1 = new Book("Misery", "Stephen King", 310, true);
 addToLibrary(book1);
 addBookCard(book1);
