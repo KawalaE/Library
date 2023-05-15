@@ -141,13 +141,8 @@ function submitBook() {
     );
     formValidation(userBook, element);
   });
-  if(userBook.title !== ''){
-    titleOutline.classList.aaa("form-success");
-  }
 }
 submitBook();
-
-
 
 /* Create example */
 const book1 = new Book("Misery", "Stephen King", 310, true);
