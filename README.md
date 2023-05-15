@@ -1,6 +1,6 @@
 Library application that allows users to add and remove books as well as change their status. Storage options will be added shortly. 
 
-<h2><a ref="https://kawalae.github.io/Library/">Click here to view!</a></h2>
+<h2><a href="https://kawalae.github.io/Library/">Click here to view!</a></h2>
 <h2><strong>Technologies used</strong></h2>
 <div style="display:flex;">
 <img src="Pictures/js.svg"></img>
