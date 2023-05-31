@@ -12,15 +12,17 @@ const authorOutline = document.querySelector("#author.text-input");
 const numberOutline = document.querySelector("#num-of-pages.text-input");
 let myLibrary = [];
 
-function Book(title, author, numberOfPages, read) {
-  this.title = title;
-  this.author = author;
-  this.numberOfPages = numberOfPages;
-  this.read = read;
-}
+class Book {
+  constructor(title, author, numberOfPages, read) {
+    this.title = title;
+    this.author = author;
+    this.numberOfPages = numberOfPages;
+    this.read = read;
+  }
 
-function addToLibrary(book) {
-  myLibrary.push(book);
+  addToLibrary() {
+    myLibrary.push(this.book);
+  }
 }
 
 function resetModal() {
@@ -127,7 +129,7 @@ function formValidation(book, element) {
     titleOutline.classList.remove("form-fail");
     authorOutline.classList.remove("form-fail");
     numberOutline.classList.remove("form-fail");
-    addToLibrary(book);
+    book.addToLibrary();
     addBookCard(book);
   }
 }
@@ -146,5 +148,5 @@ submitBook();
 
 /* Create example */
 const book1 = new Book("Misery", "Stephen King", 310, true);
-addToLibrary(book1);
+book1.addToLibrary();
 addBookCard(book1);
