@@ -11,7 +11,10 @@ const titleOutline = document.querySelector("#title.text-input");
 const authorOutline = document.querySelector("#author.text-input");
 const numberOutline = document.querySelector("#num-of-pages.text-input");
 let myLibrary = [];
-
+//HERE YOU HAVE LEFT OFF!
+function addToLocalStorage(data) {
+  localStorage.setItem("books", JSON.stringify(data));
+}
 class Book {
   constructor(title, author, numberOfPages, read) {
     this.title = title;
@@ -22,6 +25,7 @@ class Book {
 
   addToLibrary() {
     myLibrary.push(this.book);
+    addToLocalStorage(myLibrary);
   }
 }
 
@@ -73,6 +77,7 @@ function bookStatusCheck(cardInfo, buttonInfo) {
 }
 function removeBookCard(removeBtn, card, bookObj) {
   removeBtn.addEventListener("click", () => {
+    confirm("Are you sure you want to remove this book?");
     myLibrary = myLibrary.splice(myLibrary.indexOf(bookObj), 1);
     card.remove();
   });
