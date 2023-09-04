@@ -11,9 +11,10 @@ const titleOutline = document.querySelector("#title.text-input");
 const authorOutline = document.querySelector("#author.text-input");
 const numberOutline = document.querySelector("#num-of-pages.text-input");
 
-function addToLocalStorage(data) {
+function updateLocalStorage(data) {
   localStorage.setItem("books", JSON.stringify(data));
 }
+
 class Book {
   static myLibrary = [];
 
@@ -26,15 +27,28 @@ class Book {
 
   addToLibrary() {
     Book.myLibrary.push(this);
-    addToLocalStorage(Book.myLibrary);
-    console.log(Book.myLibrary);
+    updateLocalStorage(Book.myLibrary);
   }
 
   removeBook() {
     Book.myLibrary = Book.myLibrary.filter((book) => book.title !== this.title);
-    addToLocalStorage(Book.myLibrary);
-    console.log(this.title);
+    updateLocalStorage(Book.myLibrary);
   }
+}
+
+function getDataFromStorage() {
+  const storageLibrary = JSON.parse(localStorage.getItem("books"));
+  const updatedLibrary = [];
+  storageLibrary.forEach((book) => {
+    const bookInstance = new Book(
+      book.title,
+      book.author,
+      book.numberOfPages,
+      book.read
+    );
+    updatedLibrary.push(bookInstance);
+  });
+  return updatedLibrary;
 }
 
 function resetModal() {
@@ -57,7 +71,7 @@ function createModal() {
   });
 }
 
-function bookStatusCheck(cardInfo, buttonInfo) {
+function bookStatusCheck(cardInfo, buttonInfo, book) {
   if (cardInfo.textContent === "true") {
     cardInfo.textContent = "Already read!";
     buttonInfo.textContent = "Not read";
@@ -74,20 +88,24 @@ function bookStatusCheck(cardInfo, buttonInfo) {
       buttonInfo.textContent = "Read";
       buttonInfo.classList.remove("fail");
       buttonInfo.classList.add("success");
+      book.read = false;
       cardInfo.textContent = "Not read yet :(";
     } else {
       buttonInfo.textContent = "Not read";
       buttonInfo.classList.remove("success");
       buttonInfo.classList.add("fail");
+      book.read = true;
       cardInfo.textContent = "Already read!";
     }
+    updateLocalStorage(Book.myLibrary);
   });
 }
 function removeBookCard(removeBtn, card, bookObj) {
   removeBtn.addEventListener("click", () => {
-    confirm("Are you sure you want to remove this book?");
-    bookObj.removeBook();
-    card.remove();
+    if (confirm("Are you sure you want to remove this book?")) {
+      bookObj.removeBook();
+      card.remove();
+    }
   });
 }
 createModal();
@@ -110,7 +128,7 @@ function addBookCard(book) {
   statusButton.classList.add("status-btn");
   statusButton.textContent = "Not read";
   statusButton.classList.add("fail");
-  bookStatusCheck(cardStatus, statusButton);
+  bookStatusCheck(cardStatus, statusButton, book);
   removeButton.classList.add("remove");
   removeButton.textContent = "Remove";
   removeBookCard(removeButton, card, book);
@@ -121,6 +139,11 @@ function addBookCard(book) {
   card.appendChild(buttons);
   buttons.appendChild(removeButton);
   buttons.appendChild(statusButton);
+}
+function displayStorageBooks() {
+  Book.myLibrary.forEach((book) => {
+    addBookCard(book);
+  });
 }
 function formValidation(book, element) {
   if (book.title === "" && book.author === "" && book.numberOfPages === "") {
@@ -159,7 +182,13 @@ function submitBook() {
 }
 submitBook();
 
-/* Create example */
-const book1 = new Book("Misery", "Stephen King", 310, true);
-book1.addToLibrary();
-addBookCard(book1);
+function createExampleBook() {
+  if (JSON.parse(localStorage.getItem("books")) === null) {
+    const book1 = new Book("Misery", "Stephen King", 310, true);
+    book1.addToLibrary();
+    addBookCard(book1);
+  }
+}
+createExampleBook();
+Book.myLibrary = getDataFromStorage() || [];
+displayStorageBooks();
