@@ -10,12 +10,13 @@ const cards = document.getElementById("cards");
 const titleOutline = document.querySelector("#title.text-input");
 const authorOutline = document.querySelector("#author.text-input");
 const numberOutline = document.querySelector("#num-of-pages.text-input");
-let myLibrary = [];
-//HERE YOU HAVE LEFT OFF!
+
 function addToLocalStorage(data) {
   localStorage.setItem("books", JSON.stringify(data));
 }
 class Book {
+  static myLibrary = [];
+
   constructor(title, author, numberOfPages, read) {
     this.title = title;
     this.author = author;
@@ -24,8 +25,15 @@ class Book {
   }
 
   addToLibrary() {
-    myLibrary.push(this.book);
-    addToLocalStorage(myLibrary);
+    Book.myLibrary.push(this);
+    addToLocalStorage(Book.myLibrary);
+    console.log(Book.myLibrary);
+  }
+
+  removeBook() {
+    Book.myLibrary = Book.myLibrary.filter((book) => book.title !== this.title);
+    addToLocalStorage(Book.myLibrary);
+    console.log(this.title);
   }
 }
 
@@ -78,7 +86,7 @@ function bookStatusCheck(cardInfo, buttonInfo) {
 function removeBookCard(removeBtn, card, bookObj) {
   removeBtn.addEventListener("click", () => {
     confirm("Are you sure you want to remove this book?");
-    myLibrary = myLibrary.splice(myLibrary.indexOf(bookObj), 1);
+    bookObj.removeBook();
     card.remove();
   });
 }

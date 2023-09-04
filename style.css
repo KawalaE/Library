@@ -215,7 +215,9 @@ input[type="checkbox"]{
     color: #b005ff;
     font-weight: bolder;
 }
+.footer-git{
+    transition:.5s ease-in-out;
+}
 .footer-git:hover{
     transform: rotate(360deg) scale(1.1);
-    transition-duration:0.5s;
 }
