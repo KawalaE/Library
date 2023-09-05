@@ -186,7 +186,7 @@ function createExampleBook() {
   if (JSON.parse(localStorage.getItem("books")) === null) {
     const book1 = new Book("Misery", "Stephen King", 310, true);
     book1.addToLibrary();
-    addBookCard(book1);
+    updateLocalStorage(Book.myLibrary);
   }
 }
 createExampleBook();

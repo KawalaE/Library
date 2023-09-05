@@ -9,6 +9,7 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: white;
 }
 /*Fix browsers autofill*/ 
 input:-webkit-autofill,
@@ -47,6 +48,12 @@ button {
     padding: 30px;
     font-size: 28px;
     font-weight: bold;
+    justify-content: space-between;
+}
+.left-nav{
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 .logo{
     display: flex;
@@ -55,6 +62,27 @@ button {
 }
 .book-logo{
     height: 60px;
+}
+.theme-switch{
+    background-color: #292929;
+    border: solid 4px #292929;
+    border-radius: 50px;
+    cursor: pointer;
+    height: 35px;
+    outline-width: 5px;
+    position: relative;
+    width: 80px;
+}
+.theme-icon{
+    background-color: #ffffff;
+    border-radius: 100%;
+    content: "";
+    display: block;
+    height: 21px;
+    margin: 0px 6px;
+    position: relative;
+    width: 21px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 .add-books{
     text-align: center;
@@ -220,4 +248,8 @@ input[type="checkbox"]{
 }
 .footer-git:hover{
     transform: rotate(360deg) scale(1.1);
+}
+/**Dark Mode**/
+body.dark{
+    background-color: black;
 }
