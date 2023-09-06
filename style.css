@@ -40,7 +40,6 @@ button {
 }
 .nav{
     height: 100px;
-    box-shadow: 0px 2px 3px grey;
     display: flex;
     justify-content: start;
     gap: 10px;
@@ -60,7 +59,7 @@ button {
     align-items: center;
     gap: 10px;
 }
-.book-logo{
+#book-logo{
     height: 60px;
 }
 .theme-switch{
@@ -122,6 +121,7 @@ button {
 .modal{
     position: absolute;
     left: 50%;
+    background-color: white;
     top: 50%;
     transform: translate(-50%, -50%);
     min-height: 350px;
@@ -159,6 +159,7 @@ button {
     padding: 15px;
     border: 1.5px solid grey;
     border-radius: 5px;
+    background-color: white;
 }
 .form-fail{
     border-color:  red;
@@ -252,4 +253,118 @@ input[type="checkbox"]{
 /**Dark Mode**/
 body.dark{
     background-color: black;
+}
+body.dark .card{
+    color: white;
+    border-color:#b005ff;
+}
+body.dark .theme-icon{
+    background-color: #b005ff;
+    transform: translateX(40px);
+}
+
+body.dark .theme-icon::after{
+    background-color: #000;
+    border-radius: 100%;
+    content: "";
+    display: block;
+    height: 20px;
+    left: -7px;
+    position: absolute;
+    top: 1px;
+    width: 20px;
+}
+body.dark .theme-switch{
+    background-color: #000000;
+    border: solid 2px #ffffff;
+    
+}
+body.dark .left-nav{
+    color: white;
+}
+body.dark .modal, body.dark .text-input{
+    background-color: #000;
+    color: white;
+    border: 2px solid white;
+}
+body.dark .close-modal{
+    filter: brightness(0) invert(1);
+}
+/**Light mode **/
+body.light{
+    background-color: rgb(255, 255, 255);
+}
+body.light .card{
+    color: rgb(0, 0, 0);
+    border-color:rgb(145 140 140)
+}
+body.light .theme-icon{
+    background-color: #ffffff;
+    border-radius: 100%;
+    content: "";
+    display: block;
+    height: 21px;
+    margin: 0px 6px;
+    position: relative;
+    width: 21px;
+    transition: background-color 0.3s, transform 0.3s;
+    transform: translateX(0);
+}
+body.light .theme-switch{
+    border: solid 4px #292929;
+}
+body.light .theme-icon::after{
+    content: none;
+}
+body.light .left-nav{
+    color: rgb(0, 0, 0);
+}
+body.light .modal, body.light .text-input{
+    background-color: white;
+    color: black;
+    border: 2px solid rgb(145 140 140);
+}
+body.light .close-modal{
+    filter: brightness(0) invert(0);
+}
+@media (prefers-color-scheme: dark){
+    body{
+        background-color: black;
+    }
+    body .card{
+        color: white;
+        border-color:#b005ff;
+    }
+    body .theme-icon{
+        background-color: #b005ff;
+        transform: translateX(40px);
+    }
+    
+    body .theme-icon::after{
+        background-color: #000;
+        border-radius: 100%;
+        content: "";
+        display: block;
+        height: 20px;
+        left: -7px;
+        position: absolute;
+        top: 1px;
+        width: 20px;
+    }
+    body .theme-switch{
+        background-color: #000000;
+        border: solid 2px #ffffff;
+        
+    }
+    body .left-nav{
+        color: white;
+    }
+    body .modal, body .text-input{
+        background-color: #000;
+        color: white;
+        border: 2px solid white;
+    }
+    body .close-modal{
+        filter: brightness(0) invert(1);
+    }
 }

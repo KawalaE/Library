@@ -189,6 +189,48 @@ function createExampleBook() {
     updateLocalStorage(Book.myLibrary);
   }
 }
+function themeHandler() {
+  const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+  let theme = localStorage.getItem("theme");
+  if (theme === null) {
+    if (darkThemeMq.matches) {
+      document.querySelector("body").classList.remove("light");
+      document.querySelector("body").classList.add("dark");
+      document.getElementById("book-logo").src = "/Pictures/book-dark.svg";
+      theme = "dark";
+    } else {
+      document.querySelector("body").classList.remove("dark");
+      document.querySelector("body").classList.add("light");
+      document.getElementById("book-logo").src = "/Pictures/book.svg";
+      theme = "light";
+    }
+  } else if (theme === "dark") {
+    document.querySelector("body").classList.remove("light");
+    document.querySelector("body").classList.add("dark");
+    document.getElementById("book-logo").src = "/Pictures/book-dark.svg";
+  } else if (theme === "light") {
+    document.querySelector("body").classList.remove("dark");
+    document.querySelector("body").classList.add("light");
+    document.getElementById("book-logo").src = "/Pictures/book.svg";
+  }
+  localStorage.setItem("theme", theme);
+
+  document.querySelector(".theme-switch").addEventListener("click", () => {
+    if (theme === "dark") {
+      document.querySelector("body").classList.remove("dark");
+      document.querySelector("body").classList.add("light");
+      document.getElementById("book-logo").src = "/Pictures/book.svg";
+      theme = "light";
+    } else if (theme === "light") {
+      document.querySelector("body").classList.remove("light");
+      document.querySelector("body").classList.add("dark");
+      document.getElementById("book-logo").src = "/Pictures/book-dark.svg";
+      theme = "dark";
+    }
+    localStorage.setItem("theme", theme);
+  });
+}
 createExampleBook();
 Book.myLibrary = getDataFromStorage() || [];
 displayStorageBooks();
+themeHandler();
