@@ -184,22 +184,22 @@ function themeHandler() {
     if (darkThemeMq.matches) {
       document.querySelector("body").classList.remove("light");
       document.querySelector("body").classList.add("dark");
-      document.getElementById("book-logo").src = "/Pictures/book-dark.svg";
+      document.getElementById("book-logo").src = "Pictures/book-dark.svg";
       theme = "dark";
     } else {
       document.querySelector("body").classList.remove("dark");
       document.querySelector("body").classList.add("light");
-      document.getElementById("book-logo").src = "/Pictures/book.svg";
+      document.getElementById("book-logo").src = "Pictures/book.svg";
       theme = "light";
     }
   } else if (theme === "dark") {
     document.querySelector("body").classList.remove("light");
     document.querySelector("body").classList.add("dark");
-    document.getElementById("book-logo").src = "/Pictures/book-dark.svg";
+    document.getElementById("book-logo").src = "Pictures/book-dark.svg";
   } else if (theme === "light") {
     document.querySelector("body").classList.remove("dark");
     document.querySelector("body").classList.add("light");
-    document.getElementById("book-logo").src = "/Pictures/book.svg";
+    document.getElementById("book-logo").src = "Pictures/book.svg";
   }
   localStorage.setItem("theme", theme);
 
@@ -207,12 +207,12 @@ function themeHandler() {
     if (theme === "dark") {
       document.querySelector("body").classList.remove("dark");
       document.querySelector("body").classList.add("light");
-      document.getElementById("book-logo").src = "/Pictures/book.svg";
+      document.getElementById("book-logo").src = "Pictures/book.svg";
       theme = "light";
     } else if (theme === "light") {
       document.querySelector("body").classList.remove("light");
       document.querySelector("body").classList.add("dark");
-      document.getElementById("book-logo").src = "/Pictures/book-dark.svg";
+      document.getElementById("book-logo").src = "Pictures/book-dark.svg";
       theme = "dark";
     }
     localStorage.setItem("theme", theme);
