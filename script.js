@@ -145,43 +145,31 @@ function displayStorageBooks() {
     addBookCard(book);
   });
 }
-function formValidation(book, element) {
-  if (book.title === "" && book.author === "" && book.numberOfPages === "") {
-    element.preventDefault();
-    titleOutline.classList.add("form-fail");
-    authorOutline.classList.add("form-fail");
-    numberOutline.classList.add("form-fail");
+function isValid(data) {
+  if (data.value === "") {
+    return false;
   }
-  if (book.title === "") {
-    element.preventDefault();
-    titleOutline.classList.add("form-fail");
-  } else if (book.author === "") {
-    element.preventDefault();
-    authorOutline.classList.add("form-fail");
-  } else if (book.numberOfPages === "") {
-    element.preventDefault();
-    numberOutline.classList.add("form-fail");
-  } else {
-    titleOutline.classList.remove("form-fail");
-    authorOutline.classList.remove("form-fail");
-    numberOutline.classList.remove("form-fail");
-    book.addToLibrary();
-    addBookCard(book);
+  if (data.type === "number") {
+    return Number.isInteger(Number(data.value));
   }
+  return true;
 }
 function submitBook() {
-  submitBtn.addEventListener("click", (element) => {
+  submitBtn.addEventListener("click", () => {
     const userBook = new Book(
       bookTitle.value,
       bookAuthor.value,
       numOfPages.value,
       bookStatus.checked
     );
-    formValidation(userBook, element);
+
+    if (isValid(bookTitle) && isValid(bookAuthor) && isValid(numOfPages)) {
+      userBook.addToLibrary();
+      addBookCard(userBook);
+    }
   });
 }
 submitBook();
-
 function createExampleBook() {
   if (JSON.parse(localStorage.getItem("books")) === null) {
     const book1 = new Book("Misery", "Stephen King", 310, true);

@@ -161,14 +161,8 @@ button {
     border-radius: 5px;
     background-color: white;
 }
-.form-fail{
-    border-color:  red;
-}
-.form-success{
-    border-color:  rgb(95, 240, 102);
-}
 .text-input:focus{
-    outline-color:#b005ff;
+    outline-color: #b005ff;
 }
 .book-status{
     display: flex;
@@ -290,6 +284,7 @@ body.dark .modal, body.dark .text-input{
 body.dark .close-modal{
     filter: brightness(0) invert(1);
 }
+
 /**Light mode **/
 body.light{
     background-color: rgb(255, 255, 255);
